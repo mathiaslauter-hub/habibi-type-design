@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en" class="lang-en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Habibi — Bilinguales Type-Design · Mathias Lauter</title>
+<meta name="description" content="Habibi — a study on harmonizing Latin and Arabic typefaces. A bilingual type-design bachelor project by Mathias Lauter. Habibi — Studie zur Harmonisierung von lateinischen und arabischen Schrifttypen.">
+<meta property="og:title" content="Habibi — Bilingual Type-Design">
+<meta property="og:description" content="A study on harmonizing Latin and Arabic typefaces by Mathias Lauter.">
+<meta property="og:image" content="assets/book_hands.jpg">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;0,800;1,400&family=Inter:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#e11b22;
+  --blue:#1f63c9;
+  --ink:#141414;
+  --paper:#f4f1ea;
+  --paper2:#ebe6db;
+  --muted:#6b6660;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:18px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+.arabic{font-family:'Noto Naskh Arabic',serif;direction:rtl;unicode-bidi:isolate}
+
+/* language toggle visibility */
+.lang-en .de{display:none}
+.lang-de .en{display:none}
+
+/* ---- layout ---- */
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+section{padding:120px 0;position:relative}
+.eyebrow{
+  font-size:13px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--muted);font-weight:600;margin-bottom:26px;display:flex;gap:14px;align-items:center;
+}
+.eyebrow::before{content:"";width:34px;height:2px;background:var(--red)}
+h2{font-family:'Spectral',serif;font-weight:800;font-size:clamp(34px,5vw,60px);line-height:1.02;letter-spacing:-.01em;margin-bottom:34px}
+h3{font-family:'Spectral',serif;font-weight:600;font-size:26px;margin-bottom:12px;letter-spacing:-.01em}
+p{margin-bottom:20px;max-width:60ch}
+p.lead{font-size:22px;line-height:1.5;color:#2c2926}
+a{color:var(--red);text-decoration:none;border-bottom:1px solid rgba(225,27,34,.35)}
+a:hover{border-color:var(--red)}
+.red{color:var(--red)}.blue{color:var(--blue)}
+
+/* ---- top bar ---- */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;
+  padding:16px 32px;mix-blend-mode:normal;transition:.3s;pointer-events:none}
+.topbar.solid{background:rgba(244,241,234,.9);backdrop-filter:blur(8px);box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.brand{font-family:'Spectral',serif;font-weight:800;font-size:20px;pointer-events:auto}
+.brand .ar{font-family:'Noto Naskh Arabic',serif;font-weight:700;margin-left:8px;color:var(--blue);font-size:18px}
+.toggle{pointer-events:auto;display:flex;border:1.5px solid var(--ink);border-radius:40px;overflow:hidden;font-weight:600;font-size:13px;background:var(--paper)}
+.toggle button{border:0;background:transparent;padding:7px 15px;cursor:pointer;color:var(--ink);font:inherit;letter-spacing:.04em}
+.lang-de .toggle .b-de,.lang-en .toggle .b-en{background:var(--ink);color:var(--paper)}
+
+/* ---- hero ---- */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 0 80px;position:relative;overflow:hidden}
+.hero .wrap{position:relative;z-index:2}
+.hero-mark{font-family:'Spectral',serif;font-weight:800;line-height:.82;letter-spacing:-.03em}
+.hero-mark .lat{font-size:clamp(90px,20vw,240px);color:var(--red);display:block}
+.hero-mark .ar{font-family:'Noto Naskh Arabic',serif;font-size:clamp(70px,15vw,190px);color:var(--blue);display:block;direction:rtl;margin-top:-.1em;font-weight:700}
+.hero-sub{font-family:'Spectral',serif;font-size:clamp(20px,2.6vw,30px);font-weight:400;max-width:20ch;margin-top:30px;line-height:1.25}
+.hero-meta{margin-top:38px;font-size:14px;letter-spacing:.03em;color:var(--muted);line-height:1.8}
+.hero-meta strong{color:var(--ink);font-weight:600}
+.scrollcue{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);z-index:2}
+.scrollcue span{display:block;width:1px;height:34px;background:var(--muted);margin:10px auto 0;animation:cue 1.8s infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.ghost{position:absolute;font-family:'Noto Naskh Arabic',serif;color:rgba(31,99,201,.06);font-size:60vh;top:50%;right:-6vw;transform:translateY(-50%);z-index:1;direction:rtl;pointer-events:none;user-select:none}
+
+/* ---- generic grids ---- */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.grid2.text-first{grid-template-columns:1fr 1.05fr}
+figure{margin:0}
+figure img{border-radius:4px;box-shadow:0 14px 40px -18px rgba(0,0,0,.4)}
+figcaption{font-size:13px;color:var(--muted);margin-top:12px;letter-spacing:.01em}
+.tint{background:var(--paper2)}
+.tint-ink{background:var(--ink);color:var(--paper)}
+.tint-ink .eyebrow{color:#b6b0a6}.tint-ink .eyebrow::before{background:var(--red)}
+.tint-ink p.lead{color:#e9e5dd}
+.tint-ink a{color:#ff8f92;border-color:rgba(255,143,146,.4)}
+
+/* concept cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:20px}
+.card{background:var(--paper);border:1px solid rgba(20,20,20,.1);border-radius:6px;padding:28px}
+.tint .card{background:#fff}
+.card .n{font-family:'Spectral',serif;font-size:40px;font-weight:800;line-height:1;margin-bottom:14px}
+.card:nth-child(1) .n{color:var(--blue)}
+.card:nth-child(2) .n{color:var(--red)}
+.card:nth-child(3) .n{color:var(--ink)}
+.card h3{font-size:20px;margin-bottom:8px}
+.card p{font-size:15px;line-height:1.55;color:#524d47;margin:0}
+
+/* specimen row */
+.specimens{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:36px}
+.specimens figure img{background:#fff}
+.sketch-fig img{background:#fff;padding:14px;border:1px solid rgba(20,20,20,.08)}
+.sketch-fig{max-width:460px}
+
+/* portraits */
+.portrait-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:20px}
+.portrait-grid img{border-radius:4px;filter:grayscale(1) contrast(1.02)}
+.idcard{background:#fff;border-left:4px solid var(--red);padding:26px 30px;margin-top:40px;border-radius:0 6px 6px 0;max-width:560px;box-shadow:0 14px 40px -22px rgba(0,0,0,.35);color:var(--ink)}
+.idcard dl{display:grid;grid-template-columns:auto 1fr;gap:6px 26px;font-size:16px}
+.idcard dt{font-weight:700}
+.idcard dd{color:#403c37}
+.quote{font-family:'Spectral',serif;font-style:italic;font-size:clamp(22px,3vw,32px);line-height:1.4;max-width:24ch;margin:0 auto;text-align:center}
+.quote-cite{text-align:center;font-style:normal;font-family:'Inter';font-size:14px;letter-spacing:.04em;color:#9a948b;margin-top:26px}
+
+/* book gallery */
+.gallery{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-top:20px}
+.gallery figure:nth-child(1){grid-column:span 2;grid-row:span 2}
+.gallery figure:nth-child(2){grid-column:span 4}
+.gallery figure:nth-child(3){grid-column:span 2}
+.gallery figure:nth-child(4){grid-column:span 2}
+.gallery figure:nth-child(5){grid-column:span 4}
+.gallery img{width:100%;height:100%;object-fit:cover;border-radius:4px}
+
+/* footer */
+footer{background:var(--ink);color:var(--paper);padding:90px 0 60px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:40px}
+footer h2{color:var(--paper)}
+.foot-mark{font-family:'Noto Naskh Arabic',serif;font-size:64px;color:var(--red);direction:rtl}
+footer a{color:#ff8f92;border-color:rgba(255,143,146,.4)}
+.foot-meta{font-size:14px;color:#a49e95;line-height:1.9;letter-spacing:.02em}
+.foot-meta strong{color:var(--paper);font-weight:600}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:860px){
+  body{font-size:17px}
+  section{padding:80px 0}
+  .grid2,.grid2.text-first{grid-template-columns:1fr;gap:34px}
+  .cards{grid-template-columns:1fr}
+  .specimens{grid-template-columns:1fr 1fr}
+  .portrait-grid{grid-template-columns:1fr 1fr}
+  .gallery{grid-template-columns:1fr 1fr}
+  .gallery figure:nth-child(n){grid-column:span 1;grid-row:auto}
+  .gallery figure:nth-child(2),.gallery figure:nth-child(5){grid-column:span 2}
+  .ghost{display:none}
+  .wrap{padding:0 22px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar" id="topbar">
+  <div class="brand">Habibi<span class="ar">حبيبي</span></div>
+  <div class="toggle" role="group" aria-label="Language">
+    <button class="b-de" onclick="setLang('de')">DE</button>
+    <button class="b-en" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="ghost">ط</div>
+  <div class="wrap">
+    <div class="hero-mark">
+      <span class="lat">Habibi</span>
+      <span class="ar">حبيبي</span>
+    </div>
+    <p class="hero-sub de">Studie zur Harmonisierung von lateinischen und arabischen Schrifttypen.</p>
+    <p class="hero-sub en">A study on the harmonization of Latin and Arabic typefaces.</p>
+    <div class="hero-meta">
+      <span class="de"><strong>Bilinguales Type-Design</strong> · Bachelor-Projekt von Mathias Lauter</span>
+      <span class="en"><strong>Bilingual Type-Design</strong> · Bachelor project by Mathias Lauter</span>
+    </div>
+  </div>
+  <div class="scrollcue">
+    Scroll
+    <span></span>
+  </div>
+</header>
+
+<!-- ORIGIN -->
+<section id="origin">
+  <div class="wrap grid2 text-first reveal">
+    <div>
+      <div class="eyebrow"><span class="de">Ursprung der Idee</span><span class="en">Origin of the idea</span></div>
+      <h2 class="de">Krems, 2015</h2>
+      <h2 class="en">Krems, 2015</h2>
+      <p class="lead de">Im Jahr 2015 kam ich zum ersten Mal mit Asylsuchenden aus Syrien, dem Irak, Afghanistan und dem Iran in Kontakt.</p>
+      <p class="lead en">In 2015 I came into contact for the first time with people seeking asylum from Syria, Iraq, Afghanistan and Iran.</p>
+      <p class="de">In Deutschkursen, die in Krems abgehalten wurden, lernte ich sie persönlich kennen. Es folgten gegenseitige Einladungen zum Essen und Gespräche — auf Englisch und manchmal über Übersetzungs-Apps. So begegnete ich einem neuen Kulturkreis, der sich unter anderem durch unterschiedliche Sprachen und Schriften ausdrückte. Der Wunsch entstand, diese gemeinsame Zeit durch eine Schrift zu dokumentieren.</p>
+      <p class="en">I got to know them personally in German-language courses held in Krems, Austria. Shared dinners and conversations followed — in English, and sometimes through translation apps. I encountered a new cultural world, expressed among other things through different languages and scripts. From this grew the wish to document our shared time through a typeface.</p>
+    </div>
+    <figure>
+      <img src="assets/book_hands.jpg" alt="The Habibi book held open, showing portraits overlaid with Latin and Arabic letters" loading="lazy">
+      <figcaption class="de">Der Katalog verbindet Porträts der Kursteilnehmer:innen mit lateinischen und arabischen Buchstaben.</figcaption>
+      <figcaption class="en">The catalogue interleaves portraits of the course participants with Latin and Arabic letters.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- BRIEF / CONCEPT -->
+<section id="concept" class="tint">
+  <div class="wrap reveal">
+    <div class="eyebrow"><span class="de">Die Aufgabe</span><span class="en">The brief</span></div>
+    <h2 class="de">Zwei Schriften, ein Schriftbild</h2>
+    <h2 class="en">Two scripts, one voice</h2>
+    <div class="grid2 text-first" style="margin-top:10px">
+      <div>
+        <p class="de">Meine Absicht war es, mich in die Rolle eines Type-Designers zu versetzen, der eine multilinguale Schrift entwerfen soll — lateinisch <em>und</em> arabisch. Die Herausforderung: Ich beherrsche die arabische Sprache nicht, und die Schrift war mir unbekannt.</p>
+        <p class="en">My intention was to place myself in the role of a type designer tasked with creating a multilingual typeface — Latin <em>and</em> Arabic. The challenge: I do not speak Arabic, and the script was unfamiliar to me.</p>
+        <p class="de">Das Ziel war keine fertige Schrift, sondern ein Forschungsweg zur Harmonisierung beider Schriftcharakteristika — gleichmäßige Strichqualität, verwandte Proportionen, ähnliche Weißräume und ein gemeinsamer Charakter. Bei den arabischen Typen beschränkte ich mich auf die isolierten Formen.</p>
+        <p class="en">The goal was not a finished typeface but a research path toward harmonizing the characteristics of both scripts — even stroke quality, related proportions, similar white space and a shared character. For the Arabic types I limited myself to the isolated forms.</p>
+      </div>
+      <figure class="sketch-fig">
+        <img src="assets/sketch_prototype.jpg" alt="Hand-drawn sketch of the prototype letter c, constructed over pencil guidelines" loading="lazy">
+        <figcaption class="de">Der Prototyp „c“ — frei skizziert und konstruiert, nicht geschrieben. In ihm stecken die Grundformen von a, o, e, p, q und g.</figcaption>
+        <figcaption class="en">The prototype “c” — freely sketched and constructed, not written. It holds the base forms of a, o, e, p, q and g.</figcaption>
+      </figure>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="n">01</div>
+        <h3 class="de">Die Breitfeder</h3><h3 class="en">The broad nib</h3>
+        <p class="de">In historischen kalligrafischen Texten beider Schriften fand dieselbe Breitfeder Anwendung — sie erzeugt Grundformen, die lateinisch wie arabisch gleich sind. Das wurde der Ansatzpunkt.</p>
+        <p class="en">Historic calligraphy in both scripts used the same broad-nib pen — it produces basic forms shared by Latin and Arabic alike. That became the point of departure.</p>
+      </div>
+      <div class="card">
+        <div class="n">02</div>
+        <h3 class="de">Der Prototyp „c“</h3><h3 class="en">The prototype “c”</h3>
+        <p class="de">Der Buchstabe „c“ wurde nicht geschrieben, sondern frei skizziert und konstruiert — und enthält doch die Anmutung der Feder sowie die Grundformen von a, o, e, p, q und g.</p>
+        <p class="en">The letter “c” was not written but freely sketched and constructed — yet it carries the pen's feel and holds the base forms of a, o, e, p, q and g.</p>
+      </div>
+      <div class="card">
+        <div class="n">03</div>
+        <h3 class="de">Schwarz &amp; Weiß</h3><h3 class="en">Black &amp; white</h3>
+        <p class="de">Sobald die Struktur der Buchstaben verstanden war, wurde die Harmonisierung zu einem formalen Spiel aus schwarzen Strichen und weißen Innenräumen.</p>
+        <p class="en">Once the letters' structure was understood, harmonization became a formal game of black strokes and white counters.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LATIN -->
+<section id="latin">
+  <div class="wrap reveal">
+    <div class="eyebrow"><span class="de">Schriftkonzept · Lateinische Glyphen</span><span class="en">Type concept · Latin glyphs</span></div>
+    <h2 class="de">Vom <span class="red">n</span> aus gedacht</h2>
+    <h2 class="en">Thinking from the <span class="red">n</span></h2>
+    <div class="grid2 text-first">
+      <div>
+        <p class="de">Das „n“ trägt die Logik der lateinischen Glyphen: Ein leicht dreieckiger Ansatz erhöht den Kontrast und damit die Erkennbarkeit in kleinen Graden. Der großzügige Innenraum lässt den Buchstaben heller wirken und bleibt auch klein noch „scharf“.</p>
+        <p class="en">The “n” carries the logic of the Latin glyphs: a slightly triangular joint raises contrast and, with it, legibility at small sizes. The generous counter makes the letter appear lighter and keeps it crisp even when small.</p>
+        <p class="de">Erprobt wurde die Schrift an Testwörtern — von <span class="red">Afg</span> und <span class="red">Baj</span> bis zu den klassischen Städtenamen Venedig, Wien und Hamburg.</p>
+        <p class="en">The design was tested on trial words — from <span class="red">Afg</span> and <span class="red">Baj</span> to the classic type-tester city names Venice, Vienna and Hamburg.</p>
+      </div>
+      <figure>
+        <img src="assets/afg.jpg" alt="The word Afg set in the red display typeface" loading="lazy">
+        <figcaption class="de">Testwort „Afg“ — Kontrast und Bauch der Kleinbuchstaben.</figcaption>
+        <figcaption class="en">Trial word “Afg” — contrast and the bellies of the lowercase.</figcaption>
+      </figure>
+    </div>
+    <div class="specimens">
+      <figure><img src="assets/venedig.jpg" alt="Specimen: Venedig" loading="lazy"><figcaption>Venedig / Venice</figcaption></figure>
+      <figure><img src="assets/hamburg.jpg" alt="Specimen: Hamburg" loading="lazy"><figcaption>Hamburg</figcaption></figure>
+      <figure><img src="assets/baj.jpg" alt="Specimen: Baj" loading="lazy"><figcaption>Baj</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ARABIC -->
+<section id="arabic" class="tint">
+  <div class="wrap reveal">
+    <div class="eyebrow"><span class="de">Schriftkonzept · Arabische Glyphen</span><span class="en">Type concept · Arabic glyphs</span></div>
+    <h2 class="de">Drei Ordnungsprinzipien</h2>
+    <h2 class="en">Three ordering principles</h2>
+    <div class="grid2">
+      <figure>
+        <img src="assets/handwriting_grid.jpg" alt="Grid of handwriting samples collected from course participants, with derived letterforms" loading="lazy">
+        <figcaption class="de">Handschriftproben der Teilnehmer:innen als Ausgangsmaterial für die Formfindung.</figcaption>
+        <figcaption class="en">Participants' handwriting samples as source material for finding the forms.</figcaption>
+      </figure>
+      <div>
+        <p class="de">Um die arabischen Formen ohne Sprachkenntnis zu verstehen, sammelte ich Dutzende Handschriftproben und analysierte ihre Struktur. Die Buchstaben wurden nach ihren formalen Verwandtschaften gruppiert — geordnet nach drei Prinzipien:</p>
+        <p class="en">To understand the Arabic forms without knowing the language, I collected dozens of handwriting samples and analyzed their structure. The letters were grouped by their formal relationships — ordered along three principles:</p>
+        <p class="de"><strong class="blue">Nizam Al-Dairah</strong> — das Prinzip des Kreises und der Rundungen.<br>
+        <strong class="blue">Nizam Al-Nuqat</strong> — das System der diakritischen Punkte.<br>
+        <strong class="blue">Nizam Al-Tashabuh</strong> — die Ähnlichkeit verwandter Formen.</p>
+        <p class="en"><strong class="blue">Nizam Al-Dairah</strong> — the principle of the circle and its curves.<br>
+        <strong class="blue">Nizam Al-Nuqat</strong> — the system of the diacritic dots.<br>
+        <strong class="blue">Nizam Al-Tashabuh</strong> — the resemblance between related forms.</p>
+      </div>
+    </div>
+    <div class="specimens" style="margin-top:44px">
+      <figure><img src="assets/kufi.jpg" alt="Historic Kufi manuscript reference" loading="lazy"><figcaption class="de">Kufi — historische Referenz</figcaption><figcaption class="en">Kufi — historic reference</figcaption></figure>
+      <figure><img src="assets/naskh.jpg" alt="Historic Naskh manuscript reference" loading="lazy"><figcaption class="de">Naskh — historische Referenz</figcaption><figcaption class="en">Naskh — historic reference</figcaption></figure>
+      <figure><img src="assets/glyph_taa_ain.jpg" alt="Constructed glyphs taa and ain" loading="lazy"><figcaption class="de">ط ع — konstruierte Glyphen</figcaption><figcaption class="en">ط ع — constructed glyphs</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- HARMONIZATION -->
+<section id="harmony">
+  <div class="wrap reveal">
+    <div class="eyebrow"><span class="de">Harmonisierung</span><span class="en">Harmonization</span></div>
+    <h2 class="de">Wo sich <span class="red">Latein</span> und <span class="blue">Arabisch</span> treffen</h2>
+    <h2 class="en">Where <span class="red">Latin</span> meets <span class="blue">Arabic</span></h2>
+    <p class="lead de">Rot und Blau übereinandergelegt: Gemeinsame Strichstärke, Proportion und Kontrast lassen beide Schriften wie eine Familie erscheinen.</p>
+    <p class="lead en">Red laid over blue: shared stroke weight, proportion and contrast let both scripts read as one family.</p>
+    <div class="grid2" style="margin-top:20px">
+      <figure><img src="assets/a_taa.jpg" alt="Latin a overlaid with Arabic taa in red and blue" loading="lazy"><figcaption class="de">Lateinisches „a“ (rot) über der arabischen ط (blau).</figcaption><figcaption class="en">Latin “a” (red) over the Arabic ط (blue).</figcaption></figure>
+      <figure><img src="assets/n_ain.jpg" alt="Latin n overlaid with Arabic ain in red and blue" loading="lazy"><figcaption class="de">Lateinisches „n“ (rot) über der arabischen ع (blau).</figcaption><figcaption class="en">Latin “n” (red) over the Arabic ع (blue).</figcaption></figure>
+    </div>
+    <figure style="margin-top:30px">
+      <img src="assets/alphabet_grid.jpg" alt="Complete alphabet grid: red Latin letters above, blue Arabic letters below" loading="lazy">
+      <figcaption class="de">Das vollständige Alphabet — lateinische Glyphen in Rot, arabische in Blau.</figcaption>
+      <figcaption class="en">The complete alphabet — Latin glyphs in red, Arabic in blue.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- PORTRAITS -->
+<section id="portraits" class="tint-ink">
+  <div class="wrap reveal">
+    <div class="eyebrow"><span class="de">Porträts</span><span class="en">Portraits</span></div>
+    <h2 class="de">Die Menschen hinter der Schrift</h2>
+    <h2 class="en">The people behind the letters</h2>
+    <p class="lead de">Ich befragte die Kursteilnehmer:innen, wie sie schreiben lernten, welches ihr Lieblingsbuch ist und welches Wort ihnen am meisten bedeutet. Porträtfotos und Unterschriften drücken ihre Persönlichkeit aus.</p>
+    <p class="lead en">I asked the course participants how they learned to write, what their favourite book is and which word means the most to them. Portrait photographs and signatures express their personality.</p>
+    <div class="portrait-grid">
+      <img src="assets/portrait1.jpg" alt="Portrait of a participant" loading="lazy">
+      <img src="assets/portrait2.jpg" alt="Portrait of a participant" loading="lazy">
+      <img src="assets/portrait3.jpg" alt="Portrait of a participant" loading="lazy">
+      <img src="assets/portrait_couple.jpg" alt="Portrait of two participants" loading="lazy">
+    </div>
+    <div class="idcard">
+      <dl>
+        <dt class="de">Name</dt><dt class="en">Name</dt><dd>Niazi Shukrula</dd>
+        <dt class="de">Spitzname</dt><dt class="en">Nickname</dt><dd>Anjabi</dd>
+        <dt class="de">Herkunftsland</dt><dt class="en">Country</dt><dd>Afghanistan</dd>
+        <dt class="de">Muttersprache</dt><dt class="en">Mother tongue</dt><dd>Paschtu, Urdu, little English, little Dari</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section id="quote">
+  <div class="wrap reveal">
+    <blockquote class="quote de">„Sobald ich die Struktur der Buchstaben verstanden hatte, wurde es wieder ein formales Spiel aus Schwarz und Weiß.“</blockquote>
+    <blockquote class="quote en">“Once I understood the letters' structure, it became a formal game of black and white once more.”</blockquote>
+    <div class="quote-cite">Peter Biľak · <span class="de">Typographic Matchmaking, ein Vorbild dieses Projekts</span><span class="en">Typographic Matchmaking, an inspiration for this project</span></div>
+  </div>
+</section>
+
+<!-- THE BOOK -->
+<section id="book" class="tint">
+  <div class="wrap reveal">
+    <div class="eyebrow"><span class="de">Der Ausstellungskatalog</span><span class="en">The exhibition catalogue</span></div>
+    <h2 class="de">Ein Buch als Beweisstück</h2>
+    <h2 class="en">The project, bound</h2>
+    <p class="de">Der gesamte Forschungsweg — Begriffe, Konzept, Glyphen und Porträts — ist in einem zweisprachigen Katalog festgehalten, gedruckt in Rot, Blau und Schwarz.</p>
+    <p class="en">The whole research path — terminology, concept, glyphs and portraits — is gathered in a bilingual catalogue, printed in red, blue and black.</p>
+    <div class="gallery">
+      <figure><img src="assets/book_cover.jpg" alt="The Habibi book standing, cover" loading="lazy"></figure>
+      <figure><img src="assets/book_hands.jpg" alt="The book held open at the portraits spread" loading="lazy"></figure>
+      <figure><img src="assets/book_alphabet.jpg" alt="Book open at the red and blue alphabet grid" loading="lazy"></figure>
+      <figure><img src="assets/book_glyphs.jpg" alt="Book open at glyph anatomy spread" loading="lazy"></figure>
+      <figure><img src="assets/book_afg.jpg" alt="Book open at the Afg specimen spread" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="foot-mark">حبيبي</div>
+      <h2 style="font-size:34px;margin-top:10px">Habibi</h2>
+      <p class="foot-meta" style="margin-top:16px">
+        <span class="de"><strong>Habibi</strong> (حبيبي) — arabischer Koseausdruck: „mein Liebster / meine Liebe“.</span>
+        <span class="en"><strong>Habibi</strong> (حبيبي) — an Arabic term of endearment: “my dear / my love”.</span>
+      </p>
+    </div>
+    <div class="foot-meta">
+      <span class="de"><strong>Bilinguales Type-Design</strong><br>Studie zur Harmonisierung von lateinischen und arabischen Schrifttypen</span>
+      <span class="en"><strong>Bilingual Type-Design</strong><br>A study on harmonizing Latin and Arabic typefaces</span>
+      <br><br>
+      <strong>Mathias Lauter</strong><br>
+      <span class="de">Bachelor-Projekt · Krems / Wien</span>
+      <span class="en">Bachelor project · Krems / Vienna</span>
+      <br><br>
+      <span class="de">© <span id="yr"></span> Mathias Lauter. Alle Rechte vorbehalten.</span>
+      <span class="en">© <span id="yr2"></span> Mathias Lauter. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function setLang(l){
+  document.documentElement.className='lang-'+l;
+  document.documentElement.lang=l;
+  try{localStorage.setItem('habibi-lang',l)}catch(e){}
+}
+(function(){
+  var saved=null;
+  try{saved=localStorage.getItem('habibi-lang');}catch(e){}
+  if(!saved){ saved=((navigator.language||'').slice(0,2)==='de')?'de':'en'; }
+  if(saved!=='de'&&saved!=='en') saved='en';
+  setLang(saved);
+  var y=new Date().getFullYear();
+  document.getElementById('yr').textContent=y;
+  document.getElementById('yr2').textContent=y;
+
+  var tb=document.getElementById('topbar');
+  var onScroll=function(){ tb.classList.toggle('solid', window.scrollY>60); };
+  window.addEventListener('scroll',onScroll); onScroll();
+
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+})();
+</script>
+</body>
+</html>
